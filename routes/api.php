@@ -17,4 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/v2/get-salons', 'Api\DepartmentsController@index');
-Route::post('/v2/get-stylist-by-salonId', 'Api\UserController@getStylistbySalonID');
+Route::get('/v2/get-stylist-by-salonId/{id}', 'Api\UserController@getStylistbySalonID');
