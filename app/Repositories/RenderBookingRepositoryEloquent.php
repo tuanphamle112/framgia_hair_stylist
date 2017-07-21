@@ -21,4 +21,11 @@ class RenderBookingRepositoryEloquent extends AbstractRepositoryEloquent impleme
     {
     	return $this->model()->select($select)->with($with)->find($id);
     }
+
+    public function getRenderDepartment($department_id, $day, $with = [], $select = ['*'])
+    {
+        return $this->model()->select($select)->with($with)
+            ->where('department_id', $department_id)
+            ->where('day', $day)->get();
+    }
 }

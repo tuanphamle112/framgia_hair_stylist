@@ -17,14 +17,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::group(['prefix' => 'v0', 'namespace' => 'Api'], function() {
     Route::get('get-salons', 'DepartmentsController@index');
     Route::get('get-stylist-by-salonId/{id}', 'UserController@getStylistbySalonID');
-    Route::get('first_render_booking', 'ApiController@firstRenderBooking');
+    Route::get('first-render-booking', 'ApiController@firstRenderBooking');
     Route::get('get_booking_by_id/{id}', 'OrderBookingController@getBookingbyId');
     Route::post('user_booking', 'OrderBookingController@userBooking');
-    
+
+    Route::get('get-render-by-depart-stylist', 'RenderBookingController@getRenderBooking');
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
     Route::post('refresh-token', 'AuthController@refreshToken');
