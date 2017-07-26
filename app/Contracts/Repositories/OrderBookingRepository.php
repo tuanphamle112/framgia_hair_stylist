@@ -12,6 +12,5 @@ interface OrderBookingRepository extends AbstractRepository
 
     public function find($id, $with = [], $select = ['*']);
 
-    public function filterBookingByDay($with = [], $select = ['*'], $dayStart, $dayEnd);
-
+    public function filterBookingByDay($with = [], $select = ['*'], $startDate, $endDate);
 }

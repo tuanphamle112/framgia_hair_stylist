@@ -145,12 +145,13 @@ class OrderBookingController extends Controller
 
         $today = Carbon::today();
 
-        $dayStart =date('Y-m-d h:i:s', $request->day_start);
-        $dayEnd = date('Y-m-d h:i:s', $request->day_end);
+        $startDate =date('Y-m-d h:i:s', $request->start_date);
+        $endDate = date('Y-m-d h:i:s', $request->end_date);
         
         $rule = [
-            'day_start' => 'required|integer',
-            'day_end' => 'required|integer',
+            'start_date' => 'required|integer',
+            'end_date' => 'required|integer',
+
         ];
 
         $validator = Validator::make($request->all(), $rule);
@@ -165,9 +166,10 @@ class OrderBookingController extends Controller
             return Response::json($response, 403);
         }
 
-        if($dayStart && $dayEnd)
+        if($startDate && $endDate)
         {
-            if(  $request->day_start >  $request->day_end )
+            if(  $request->start_date >  $request->end_date )
+
             {
                 $response['status'] = 403;
                 $response['error'] = true;
@@ -177,7 +179,7 @@ class OrderBookingController extends Controller
             }
             $perPage = $request->per_page ?: config('model.booking.default_filter_limit');
 
-            $data = $this->OrderBooking->filterBookingByDay($dayStart, $dayEnd, $perPage, 'getBookingRender');
+            $data = $this->OrderBooking->filterBookingByDay($startDate, $endDate, $perPage, 'getBookingRender');
 
             if($data->count() == 0)
             {
